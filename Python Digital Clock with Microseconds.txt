@@ -1,0 +1,55 @@
+Python Digital Clock with Microseconds
+
+import tkinter as tk
+import time
+
+def update_clock():
+    current_time = time.strftime("%H:%M:%S")  # Get current time in HH:MM:SS format
+    milliseconds = int(time.time() * 1000) % 1000  # Get current milliseconds
+    microseconds = int(time.time() * 1_000_000) % 1000  # Get current microseconds
+    current_time += f".{milliseconds:03}{microseconds:03}"  # Append milliseconds and microseconds
+    label.config(text=current_time)  # Update the label with current time
+    label.after(10, update_clock)  # Call this function again after 10 milliseconds
+
+# Create the main window
+root = tk.Tk()
+root.title("Digital Clock with Milliseconds and Microseconds")
+
+# Create a label to display the time
+label = tk.Label(root, font=('calibri', 40, 'bold'), background='black', foreground='white')
+label.pack(anchor='center')
+
+update_clock()  # Initial call to update the clock
+
+# Start the GUI event loop
+root.mainloop()
+
+
+VARIATION
+
+import tkinter as tk
+import time
+
+def update_clock():
+    # Get the current time in 12-hour format with AM/PM
+    current_time = time.strftime("%I:%M:%S")  # %I for 12-hour format, %p for AM/PM
+    milliseconds = int(time.time() * 1000) % 1000  # Get current milliseconds
+    microseconds = int(time.time() * 1_000_000) % 1000  # Get current microseconds
+    current_time += f":{milliseconds:03}{microseconds:03}"  # Append milliseconds and microseconds
+    label.config(text=current_time)  # Update the label with current time
+    label.after(10, update_clock)  # Call this function again after 10 milliseconds
+
+# Create the main window
+root = tk.Tk()
+root.title("Digital Clock (12-Hour Format) with Milliseconds and Microseconds")
+
+# Create a label to display the time
+label = tk.Label(root, font=('calibri', 40, 'bold'), background='black', foreground='white')
+label.pack(anchor='center')
+
+update_clock()  # Initial call to update the clock
+
+# Start the GUI event loop
+root.mainloop()
+
+
